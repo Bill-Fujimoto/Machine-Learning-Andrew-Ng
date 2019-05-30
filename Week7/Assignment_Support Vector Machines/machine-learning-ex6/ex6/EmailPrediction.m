@@ -15,6 +15,8 @@
 load('spamTrain.mat');
 
 C = 0.1;
+% This try-catch checks whether the training has been done.  If done, it saves the time of not repeating the training sequence.
+
 try
   if ~isstruct(model)
     model = svmTrain(X, y, C, @linearKernel);
@@ -25,13 +27,15 @@ catch
   model = svmTrain(X, y, C, @linearKernel);
 end_try_catch
 
-filename = 'Important Lutron and Nest Product Integration Update.txt';
-%filename = 'An Off-Wall-Street Heros Guide to Your  Next Million.txt'
+%filename = 'Important Lutron and Nest Product Integration Update.txt';
+filename = 'An Off-Wall-Street Heros Guide to Your Next Million.txt'
 
-% Read and predict
+% Read email and Feature extraction 'x' of given email
 file_contents = readFile(filename);
 word_indices  = processEmail(file_contents);
 x             = emailFeatures(word_indices);
+
+% Make spam prediction
 p = svmPredict(model, x);
 
 fprintf('\nProcessed %s\n\nSpam Classification: %d\n', filename, p);

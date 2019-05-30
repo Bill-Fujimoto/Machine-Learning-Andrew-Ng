@@ -1,5 +1,5 @@
 function x = emailFeatures(word_indices)
-%EMAILFEATURES takes in a word_indices vector and produces a feature vector
+%EMAILFEATURES takes in a word_indices vector and produces a feature vector 'x'
 %from the word indices
 %   x = EMAILFEATURES(word_indices) takes in a word_indices vector and 
 %   produces a feature vector from the word indices. 
@@ -39,7 +39,7 @@ x = zeros(n, 1);
 %
 %              Your task is take one such word_indices vector and construct
 %              a binary feature vector that indicates whether a particular
-%              word occurs in the email. That is, x(i) = 1 when word i
+%              word occurs in the email. That is, x(n) = 1 when word n
 %              is present in the email. Concretely, if the word 'the' (say,
 %              index 60) appears in the email, then x(60) = 1. The feature
 %              vector should look like:

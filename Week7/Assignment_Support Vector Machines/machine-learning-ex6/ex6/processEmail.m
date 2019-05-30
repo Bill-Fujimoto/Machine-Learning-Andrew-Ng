@@ -58,6 +58,8 @@ l = 0;
 while ~isempty(email_contents)
 
     % Tokenize and also get rid of any punctuation
+    
+    % strtok() returns 'str' which is the first string of characters up to but not including the any of the delimiters in the list, essentially the first word in 'email_contents'; it also returns 'email_contents' which is the remainder of the input string 'email_contents'.  Therefore 'email_contents' will eventually reduce to empty which will terminate the while loop.
     [str, email_contents] = ...
        strtok(email_contents, ...
               [' @$/#.-:&*+=[]?!(){},''">_<;%' char(10) char(13)]);
@@ -91,14 +93,15 @@ while ~isempty(email_contents)
     %               'action', then, you should add 18 to the word_indices 
     %               vector (e.g., word_indices = [word_indices ; 18]; ).
     % 
-    % Note: vocabList{idx} returns a the word with index idx in the
+    % Note: vocabList(idx) returns a the word with index idx in the
     %       vocabulary list.
     % 
     % Note: You can use strcmp(str1, str2) to compare two strings (str1 and
     %       str2). It will return 1 only if the two strings are equivalent.
     %
-    match = strcmp(str, vocabList); % strcmp() returns vector of logical list of matching locations
-    word_indices = [word_indices find(match)]; % find() returns the index of non-zero; then appends to word_indices.  if no match, find() returns a null vector and can be appended without any problems.
+    match = strcmp(str, vocabList); % strcmp() returns a logical list of matching locations, e.g. [0;0;1;0;0;1;0;....].  The output vector length is equal to the length of input vector.
+    
+    word_indices = [word_indices find(match)]; % find(match) returns the index of non-zero locations in 'match'; then appends this value to word_indices vector, e.g. [688; 527; 304; 826;.... ]  If no match, find() returns a null vector and can be appended without any problems.
     
     % =============================================================
 
